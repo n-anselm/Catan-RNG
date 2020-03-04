@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#B71C1C"
+        android:elevation="4dp"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/settings_back_arrow"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/back_arrow_white" />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="50dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/settings"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp">
+
+                <TextView
+                    android:id="@+id/textview_spin_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingLeft="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/spin_method"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextLight"
+                    android:textSize="20sp" />
+
+                <View
+                    android:id="@+id/view_divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/textview_spin_method"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/colorPrimary" />
+
+                <FrameLayout
+                    android:id="@+id/framelayout_info1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginRight="4dp"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="4dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_info" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/framelayout_info2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/framelayout_info1"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="4dp"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="4dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_info" />
+
+                </FrameLayout>
+
+                <View
+                    android:id="@+id/view_dividerwhite1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@id/textview_spin_method"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/colorTextLight" />
+
+                <RadioGroup
+                    android:id="@+id/radiogroup"
+                    android:layout_width="304dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_divider1">
+
+                    <RadioButton
+                        android:id="@+id/radioButton1"
+                        style="@style/RadioButtonStyle"
+                        android:text="2x || 1-6" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        style="@style/RadioButtonStyle"
+                        android:text="1x || 2-12" />
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp">
+
+                <TextView
+                    android:id="@+id/textview_other"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingLeft="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/other"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextLight"
+                    android:textSize="20sp" />
+
+                <View
+                    android:id="@+id/view_divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/textview_other"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_vibrate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_divider2"
+                    android:orientation="horizontal">
+
+                    <Switch
+                        android:id="@+id/switch_vibrate"
+                        style="@style/SwitchStyle"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/vibrate" />
+
+                    <FrameLayout
+                        style="@style/FrameLayoutforImageViewStyle"
+                        android:id="@+id/framelayout_info_vibrate">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_info" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+<!--                LinearLayout divider-1-->
+                <LinearLayout
+                    style="@style/LinearLayoutDividerStyle"
+                    android:id="@+id/linearlayout_divider1"
+                    android:layout_below="@id/linearlayout_vibrate" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_shake"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearlayout_vibrate"
+                    android:orientation="horizontal">
+
+                    <Switch
+                        android:id="@+id/switch_shake"
+                        style="@style/SwitchStyle"
+                        android:text="@string/shake" />
+
+                    <FrameLayout
+                        style="@style/FrameLayoutforImageViewStyle"
+                        android:id="@+id/framelayout_info_shake">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_info" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+<!--                LinearLayout divider-2-->
+                <LinearLayout
+                    style="@style/LinearLayoutDividerStyle"
+                    android:id="@+id/linearlayout_divider2"
+                    android:layout_below="@id/linearlayout_shake" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearlayout_shake"
+                    android:orientation="horizontal">
+
+                    <Switch
+                        android:id="@+id/switch_duplicate"
+                        style="@style/SwitchStyle"
+                        android:text="@string/filter" />
+
+                    <FrameLayout
+                        style="@style/FrameLayoutforImageViewStyle"
+                        android:id="@+id/framelayout_info_filter">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_info" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+<!--                LinearLayout divider-2-->
+<!--                <LinearLayout-->
+<!--                    style="@style/LinearLayoutDividerStyle"-->
+<!--                    android:id="@+id/linearlayout_divider3"-->
+<!--                    android:layout_below="@id/linearlayout_filter" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/linearlayout_exclude7"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@id/linearlayout_filter"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <Switch-->
+<!--                        style="@style/SwitchStyle"-->
+<!--                        android:id="@+id/switch_exclude7"-->
+<!--                        android:text="@string/exclude7" />-->
+
+<!--                    <FrameLayout-->
+<!--                        style="@style/FrameLayoutforImageViewStyle"-->
+<!--                        android:id="@+id/framelayout_info_exclude7">-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="24dp"-->
+<!--                            android:layout_height="24dp"-->
+<!--                            android:src="@drawable/ic_info" />-->
+
+<!--                    </FrameLayout>-->
+
+<!--                </LinearLayout>-->
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
