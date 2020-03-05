@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Catan RNG</string>
     <string name="game_overview">Game Overview</string>
+    <string name="history">History</string>
     <string name="settings">Settings</string>
     <string name="about_catan_spinner">About Catan RNG</string>
-    <string name="spin_method">Spin method</string>
+    <string name="number_generation_method">Number generation method</string>
     <string name="other">Other</string>
     <string name="vibrate">Vibrate</string>
     <string name="shake">Shake</string>
     <string name="filter">Duplicate number filter</string>
     <string name="exclude7">Exclude 7</string>
-    <string name="version_number">Version 1.0.8</string>
+    <string name="version_number">Version 1.1.12</string>
     <string name="developed_maintained_by">Developed and maintained by</string>
     <string name="my_name">Anselm Development</string>
     <string name="comments">Any comments, questions, or ideas?</string>

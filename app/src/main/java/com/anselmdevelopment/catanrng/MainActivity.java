@@ -1,9 +1,11 @@
 package com.anselmdevelopment.catanrng;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,12 +13,14 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.appizona.yehiahd.fastsave.FastSave;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import safety.com.br.android_shake_detector.core.ShakeCallback;
@@ -33,6 +37,8 @@ import static com.anselmdevelopment.catanrng.SettingsActivity.SHAKE;
 public class MainActivity extends AppCompatActivity {
 
     int number;
+    public static final ArrayList<String> history = new ArrayList<>();
+    public static String hist = null;
     public boolean isSpinMethod1;
     public boolean isSpinMethod2;
     public boolean isVibrate;
@@ -74,6 +80,37 @@ public class MainActivity extends AppCompatActivity {
                             Intent gameOverviewActivity = new Intent(MainActivity.this, GameOverviewActivity.class);
                             startActivity(gameOverviewActivity);
                             return true;
+                        } else if (id == R.id.action_history) {
+                            if (history.isEmpty()) {
+                                hist = "No history";
+                            } else {
+                                hist = history.toString().replace("[", "").replace("]", "");
+                            }
+                            final AlertDialog dialog = new AlertDialog
+                                    .Builder(MainActivity.this)
+                                    .setTitle("History")
+                                    .setMessage(String.valueOf(hist))
+                                    .setPositiveButton(android.R.string.ok, null)
+                                    .setNeutralButton("Clear", null)
+                                    .create();
+
+                            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+
+                                @Override
+                                public void onShow(DialogInterface dialogInterface) {
+
+                                    Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
+                                    button.setOnClickListener(new View.OnClickListener() {
+
+                                        @Override
+                                        public void onClick(View view) {
+                                            history.clear();
+                                            dialog.setMessage("No history");
+                                        }
+                                    });
+                                }
+                            });
+                            dialog.show();
                         } else if (id == R.id.action_settings) {
                             Intent settingsActivity = new Intent(MainActivity.this, SettingsActivity.class);
                             startActivity(settingsActivity);
@@ -131,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
         int max = 12;
         Random random = new Random();
         int randomNumber = random.nextInt(max - min + 1) + min;
+        history.add(String.valueOf(randomNumber));
         return randomNumber;
     }
 
@@ -138,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
         int number1 = spinMethod1();
         int number2 = spinMethod1();
         int sum = number1 + number2;
+        history.add(String.valueOf(sum));
         return sum;
     }
 

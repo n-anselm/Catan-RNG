@@ -57,7 +57,7 @@
 
     <style name="RadioButtonStyle">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:buttonTint">@color/colorAccent</item>
         <item name="android:color">@android:color/white</item>
         <item name="android:foreground">?attr/selectableItemBackground</item>
@@ -70,6 +70,8 @@
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:paddingLeft">4dp</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:paddingBottom">4dp</item>

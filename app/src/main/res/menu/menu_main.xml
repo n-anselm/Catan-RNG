@@ -12,6 +12,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_history"
+        android:orderInCategory="1"
+        android:title="@string/history"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="2"
         android:title="@string/settings"
