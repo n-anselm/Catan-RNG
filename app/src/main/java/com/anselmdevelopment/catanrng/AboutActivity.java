@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AboutActivity extends AppCompatActivity {
 
     String[] mEmailAddress = {"na.appdevelopment@gmail.com"};
-    String mSubject = "Catan Spinner Feedback";
+    String mSubject = "Catan RNG Feedback";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
