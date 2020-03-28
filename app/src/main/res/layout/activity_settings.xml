@@ -163,13 +163,22 @@
 
                 </RadioGroup>
 
+                <View
+                    android:id="@+id/view_dividerwhite2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.75dp"
+                    android:layout_below="@id/radiogroup"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/colorTextLight" />
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="8dp">
 
                 <TextView
@@ -179,7 +188,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:paddingLeft="4dp"
                     android:paddingBottom="4dp"
-                    android:text="@string/other"
+                    android:text="@string/general"
                     android:textAllCaps="true"
                     android:textColor="@color/colorTextLight"
                     android:textSize="20sp" />
@@ -317,30 +326,36 @@
                     style="@style/LinearLayoutDividerStyle"
                     android:layout_below="@id/linearlayout_filter" />
 
-                <!--                <LinearLayout-->
-                <!--                    android:id="@+id/linearlayout_exclude7"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_below="@id/linearlayout_filter"-->
-                <!--                    android:orientation="horizontal">-->
+                <LinearLayout
+                    android:id="@+id/linearlayout_exclude7"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/linearlayout_filter"
+                    android:orientation="horizontal">
 
-                <!--                    <Switch-->
-                <!--                        style="@style/SwitchStyle"-->
-                <!--                        android:id="@+id/switch_exclude7"-->
-                <!--                        android:text="@string/exclude7" />-->
+                    <Switch
+                        android:id="@+id/switch_exclude7"
+                        style="@style/SwitchStyle"
+                        android:text="@string/exclude7" />
 
-                <!--                    <FrameLayout-->
-                <!--                        style="@style/FrameLayoutforImageViewStyle"-->
-                <!--                        android:id="@+id/framelayout_info_exclude7">-->
+                    <FrameLayout
+                        android:id="@+id/framelayout_info_exclude7"
+                        style="@style/FrameLayoutforImageViewStyle">
 
-                <!--                        <ImageView-->
-                <!--                            android:layout_width="24dp"-->
-                <!--                            android:layout_height="24dp"-->
-                <!--                            android:src="@drawable/ic_info" />-->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_info" />
 
-                <!--                    </FrameLayout>-->
+                    </FrameLayout>
 
-                <!--                </LinearLayout>-->
+                </LinearLayout>
+
+                <!--LinearLayout divider-5-->
+                <LinearLayout
+                    android:id="@+id/linearlayout_divider5"
+                    style="@style/LinearLayoutDividerStyle"
+                    android:layout_below="@id/linearlayout_exclude7" />
 
             </RelativeLayout>
 

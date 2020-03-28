@@ -26,14 +26,14 @@ public class SettingsActivity extends AppCompatActivity {
     public boolean isShake;
     public boolean isAnimate;
     public boolean isDuplicate;
-    //    public boolean isExlude7;
+        public boolean isExlude7;
     public static final String RADIO1 = "radio1";
     public static final String RADIO2 = "radio2";
     public static final String SHAKE = "shake";
     public static final String VIBRATE = "vibrate";
     public static final String ANIMATE = "animate";
     public static final String DUPLICATE = "duplicate";
-//    public static final String EXCLUDE7 = "exclude7Switch";
+    public static final String EXCLUDE7 = "exclude7Switch";
 
     @Override
     public void onBackPressed() {
@@ -52,7 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
         shakeSwitch = findViewById(R.id.switch_shake);
         animateSwitch = findViewById(R.id.switch_animate);
         dNumberSwitch = findViewById(R.id.switch_duplicate);
-//        exclude7Switch = findViewById(R.id.switch_exclude7);
+        exclude7Switch = findViewById(R.id.switch_exclude7);
 
         isRadio1 = FastSave.getInstance().getBoolean(RADIO1, true);
         isRadio2 = FastSave.getInstance().getBoolean(RADIO2, false);
@@ -60,7 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
         isShake = FastSave.getInstance().getBoolean(SHAKE, false);
         isAnimate = FastSave.getInstance().getBoolean(ANIMATE, true);
         isDuplicate = FastSave.getInstance().getBoolean(DUPLICATE, true);
-//        isExlude7 = FastSave.getInstance().getBoolean(EXCLUDE7, false);
+        isExlude7 = FastSave.getInstance().getBoolean(EXCLUDE7, false);
 
         if (isRadio1) {
             radioButton1.setChecked(true);
@@ -87,11 +87,11 @@ public class SettingsActivity extends AppCompatActivity {
         } else {
             dNumberSwitch.setChecked(false);
         }
-//        if (isExlude7) {
-//            exclude7Switch.setChecked(true);
-//        } else {
-//            exclude7Switch.setChecked(false);
-//        }
+        if (isExlude7) {
+            exclude7Switch.setChecked(true);
+        } else {
+            exclude7Switch.setChecked(false);
+        }
 
         radioButton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,18 +166,18 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-//        exclude7Switch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (exclude7Switch.isChecked()) {
-//                    isExlude7 = true;
-//                    FastSave.getInstance().saveBoolean(EXCLUDE7, isExlude7);
-//                } else {
-//                    isExlude7 = false;
-//                    FastSave.getInstance().saveBoolean(EXCLUDE7, isExlude7);
-//                }
-//            }
-//        });
+        exclude7Switch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (exclude7Switch.isChecked()) {
+                    isExlude7 = true;
+                    FastSave.getInstance().saveBoolean(EXCLUDE7, isExlude7);
+                } else {
+                    isExlude7 = false;
+                    FastSave.getInstance().saveBoolean(EXCLUDE7, isExlude7);
+                }
+            }
+        });
 
         FrameLayout backArrow = findViewById(R.id.settings_back_arrow);
         // Sets onClickListener on the back arrow
@@ -260,16 +260,16 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-//        FrameLayout exclude7Info = findViewById(R.id.framelayout_info_exclude7);
-//        exclude7Info.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-//                builder.setTitle("Exclude 7")
-//                        .setMessage("Enabling this will exclude the number 7 from spin results.")
-//                        .setPositiveButton("Ok", null)
-//                        .create().show();
-//            }
-//        });
+        FrameLayout exclude7Info = findViewById(R.id.framelayout_info_exclude7);
+        exclude7Info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                builder.setTitle("Exclude 7")
+                        .setMessage(R.string.info_exclude7)
+                        .setPositiveButton("Ok", null)
+                        .create().show();
+            }
+        });
     }
 }

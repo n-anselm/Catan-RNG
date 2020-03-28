@@ -31,6 +31,7 @@ import safety.com.br.android_shake_detector.core.ShakeOptions;
 import static com.anselmdevelopment.catanrng.SettingsActivity.ANIMATE;
 import static com.anselmdevelopment.catanrng.SettingsActivity.DUPLICATE;
 //import static com.anselmdevelopment.catanrng.SettingsActivity.EXCLUDE7;
+import static com.anselmdevelopment.catanrng.SettingsActivity.EXCLUDE7;
 import static com.anselmdevelopment.catanrng.SettingsActivity.RADIO1;
 import static com.anselmdevelopment.catanrng.SettingsActivity.RADIO2;
 import static com.anselmdevelopment.catanrng.SettingsActivity.VIBRATE;
@@ -338,17 +339,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void setRandomNumberText(int i) {
         final int x = i;
-        if (FastSave.getInstance().getBoolean(ANIMATE, true)) {
-            int delay = 1;
-            new Handler().postDelayed(new Runnable() {
-                public void run() {
-                    mRandomNumber.setText(Integer.toString(x));
-                }
-            }, delay + 500);
+        if (FastSave.getInstance().getBoolean(EXCLUDE7, false) && x == 7) {
+            generateRandomNumber();
         } else {
-            mRandomNumber.setText(Integer.toString(x));
+            if (FastSave.getInstance().getBoolean(ANIMATE, true)) {
+                int delay = 1;
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        mRandomNumber.setText(Integer.toString(x));
+                    }
+                }, delay + 500);
+            } else {
+                mRandomNumber.setText(Integer.toString(x));
+            }
         }
-
     }
 
     public void vibrate() {
