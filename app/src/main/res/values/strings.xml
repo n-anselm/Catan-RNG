@@ -11,12 +11,13 @@
     <string name="animation">Animation</string>
     <string name="filter">Duplicate number filter</string>
     <string name="exclude7">Exclude 7</string>
-    <string name="version_number">Version 1.1.13</string>
+    <string name="version_number_text">Version 1.3.17</string>
     <string name="developed_maintained_by">Developed and maintained by</string>
     <string name="my_name">Anselm Development</string>
     <string name="comments">Any comments, questions, or ideas?</string>
     <string name="send_feedback">Send Feedback</string>
     <string name="version_release_date">Version release date: January 30, 2020</string>
+    <string name="app_version_number">1.3.17</string>
     <string name="text_1">The island of Catan lies before you. The isle consists of 19 terrain tiles surrounded by ocean. Your goal is to settle on Catan, and expand your territory until it becomes the largest and most glorious in Catan.</string>
     <string name="text_2">There are five productive terrain types and one desert on Catan. Each terrain type produces a different type of resource (The desert produces nothing). Each resource you receive is represented by a card.</string>
     <string name="text_3">You begin with 2 settlements and 2 roads. Each settlement is worth 1 victory point. You therefore start the game with 2 victory points! The first player to acquire 10 victory points on his/her turn wins the game.</string>
