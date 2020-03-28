@@ -78,14 +78,14 @@
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="96dp"
+                    android:layout_height="112dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp">
+                        android:layout_height="56dp">
 
                         <!--Info 1-->
                         <FrameLayout
@@ -109,7 +109,7 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp"
+                        android:layout_height="56dp"
                         android:layout_alignParentBottom="true">
 
                         <!--Info 2-->
@@ -141,25 +141,25 @@
                     android:layout_height="0.75dp"
                     android:layout_below="@id/textview_spin_method"
                     android:layout_marginLeft="4dp"
-                    android:layout_marginTop="48dp"
+                    android:layout_marginTop="57dp"
                     android:layout_marginRight="4dp"
                     android:background="@color/colorTextLight" />
 
                 <RadioGroup
                     android:id="@+id/radiogroup"
                     android:layout_width="304dp"
-                    android:layout_height="96dp"
+                    android:layout_height="112.75dp"
                     android:layout_below="@id/view_divider1">
 
                     <RadioButton
                         android:id="@+id/radioButton1"
                         style="@style/RadioButtonStyle"
-                        android:text="2x  1-6" />
+                        android:text="2x  1 - 6" />
 
                     <RadioButton
                         android:id="@+id/radioButton2"
                         style="@style/RadioButtonStyle"
-                        android:text="1x  2-12" />
+                        android:text="1x  2 - 12" />
 
                 </RadioGroup>
 
@@ -169,7 +169,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginRight="8dp">
 
                 <TextView
@@ -196,7 +196,7 @@
                 <LinearLayout
                     android:id="@+id/linearlayout_vibrate"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="56dp"
                     android:layout_below="@id/view_divider2"
                     android:orientation="horizontal">
 
@@ -227,7 +227,7 @@
                 <LinearLayout
                     android:id="@+id/linearlayout_shake"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="56dp"
                     android:layout_below="@id/linearlayout_vibrate"
                     android:orientation="horizontal">
 
@@ -258,7 +258,7 @@
                 <LinearLayout
                     android:id="@+id/linearlayout_animation"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="56dp"
                     android:layout_below="@id/linearlayout_shake"
                     android:orientation="horizontal">
 
@@ -289,7 +289,7 @@
                 <LinearLayout
                     android:id="@+id/linearlayout_filter"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="56dp"
                     android:layout_below="@id/linearlayout_animation"
                     android:orientation="horizontal">
 
