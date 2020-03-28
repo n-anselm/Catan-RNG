@@ -355,7 +355,8 @@
                 <LinearLayout
                     android:id="@+id/linearlayout_divider5"
                     style="@style/LinearLayoutDividerStyle"
-                    android:layout_below="@id/linearlayout_exclude7" />
+                    android:layout_below="@id/linearlayout_exclude7"
+                    android:layout_marginBottom="8dp" />
 
             </RelativeLayout>
 
