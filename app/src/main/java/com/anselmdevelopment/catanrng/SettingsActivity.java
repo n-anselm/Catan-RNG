@@ -17,18 +17,21 @@ public class SettingsActivity extends AppCompatActivity {
     RadioButton radioButton2;
     Switch vibrateSwitch;
     Switch shakeSwitch;
+    Switch animateSwitch;
     Switch dNumberSwitch;
     Switch exclude7Switch;
     public boolean isRadio1;
     public boolean isRadio2;
     public boolean isVibrate;
     public boolean isShake;
+    public boolean isAnimate;
     public boolean isDuplicate;
     //    public boolean isExlude7;
     public static final String RADIO1 = "radio1";
     public static final String RADIO2 = "radio2";
     public static final String SHAKE = "shake";
     public static final String VIBRATE = "vibrate";
+    public static final String ANIMATE = "animate";
     public static final String DUPLICATE = "duplicate";
 //    public static final String EXCLUDE7 = "exclude7Switch";
 
@@ -47,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
         radioButton2 = findViewById(R.id.radioButton2);
         vibrateSwitch = findViewById(R.id.switch_vibrate);
         shakeSwitch = findViewById(R.id.switch_shake);
+        animateSwitch = findViewById(R.id.switch_animate);
         dNumberSwitch = findViewById(R.id.switch_duplicate);
 //        exclude7Switch = findViewById(R.id.switch_exclude7);
 
@@ -54,6 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
         isRadio2 = FastSave.getInstance().getBoolean(RADIO2, false);
         isVibrate = FastSave.getInstance().getBoolean(VIBRATE, false);
         isShake = FastSave.getInstance().getBoolean(SHAKE, false);
+        isAnimate = FastSave.getInstance().getBoolean(ANIMATE, true);
         isDuplicate = FastSave.getInstance().getBoolean(DUPLICATE, true);
 //        isExlude7 = FastSave.getInstance().getBoolean(EXCLUDE7, false);
 
@@ -71,6 +76,11 @@ public class SettingsActivity extends AppCompatActivity {
             shakeSwitch.setChecked(true);
         } else {
             shakeSwitch.setChecked(false);
+        }
+        if (isAnimate) {
+            animateSwitch.setChecked(true);
+        } else {
+            animateSwitch.setChecked(false);
         }
         if (isDuplicate) {
             dNumberSwitch.setChecked(true);
@@ -130,6 +140,19 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        animateSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (animateSwitch.isChecked()) {
+                    isAnimate = true;
+                    FastSave.getInstance().saveBoolean(ANIMATE, isAnimate);
+                } else {
+                    isAnimate = false;
+                    FastSave.getInstance().saveBoolean(ANIMATE, isAnimate);
+                }
+            }
+        });
+
         dNumberSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,9 +192,8 @@ public class SettingsActivity extends AppCompatActivity {
         info1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("1st Spin Method")
+                builder.setTitle("1st Generation Method")
                         .setMessage(R.string.info_method1)
                         .setPositiveButton("Ok", null)
                         .create().show();
@@ -182,9 +204,8 @@ public class SettingsActivity extends AppCompatActivity {
         info2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("2nd Spin Method")
+                builder.setTitle("2nd Generation Method")
                         .setMessage(R.string.info_method2)
                         .setPositiveButton("Ok", null)
                         .create().show();
@@ -195,7 +216,6 @@ public class SettingsActivity extends AppCompatActivity {
         vibrateInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
                 builder.setTitle("Vibrate")
                         .setMessage(R.string.info_vibrate)
@@ -208,10 +228,21 @@ public class SettingsActivity extends AppCompatActivity {
         shakeInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
                 builder.setTitle("Shake")
                         .setMessage(R.string.info_shake)
+                        .setPositiveButton("Ok", null)
+                        .create().show();
+            }
+        });
+
+        FrameLayout animateInfo = findViewById(R.id.framelayout_info_animate);
+        animateInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                builder.setTitle("Animation")
+                        .setMessage(R.string.info_animate)
                         .setPositiveButton("Ok", null)
                         .create().show();
             }
@@ -221,7 +252,6 @@ public class SettingsActivity extends AppCompatActivity {
         dnfInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
                 builder.setTitle("Duplicate number filter")
                         .setMessage(R.string.info_duplicate_number_filter)
@@ -234,7 +264,6 @@ public class SettingsActivity extends AppCompatActivity {
 //        exclude7Info.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//
 //                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
 //                builder.setTitle("Exclude 7")
 //                        .setMessage("Enabling this will exclude the number 7 from spin results.")

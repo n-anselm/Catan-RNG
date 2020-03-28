@@ -70,11 +70,11 @@
                 <View
                     android:id="@+id/view_divider1"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="2dp"
                     android:layout_below="@id/textview_spin_method"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
-                    android:background="@color/colorPrimary" />
+                    android:background="@color/colorTextLight" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -138,7 +138,7 @@
                 <View
                     android:id="@+id/view_dividerwhite1"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
+                    android:layout_height="0.75dp"
                     android:layout_below="@id/textview_spin_method"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="48dp"
@@ -187,11 +187,11 @@
                 <View
                     android:id="@+id/view_divider2"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="2dp"
                     android:layout_below="@id/textview_other"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
-                    android:background="@color/colorPrimary" />
+                    android:background="@color/colorTextLight" />
 
                 <LinearLayout
                     android:id="@+id/linearlayout_vibrate"
@@ -256,10 +256,41 @@
                     android:layout_below="@id/linearlayout_shake" />
 
                 <LinearLayout
-                    android:id="@+id/linearlayout_filter"
+                    android:id="@+id/linearlayout_animation"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_below="@id/linearlayout_shake"
+                    android:orientation="horizontal">
+
+                    <Switch
+                        android:id="@+id/switch_animate"
+                        style="@style/SwitchStyle"
+                        android:text="@string/animation" />
+
+                    <FrameLayout
+                        android:id="@+id/framelayout_info_animate"
+                        style="@style/FrameLayoutforImageViewStyle">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_info" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <!--LinearLayout divider-3-->
+                <LinearLayout
+                    android:id="@+id/linearlayout_divider3"
+                    style="@style/LinearLayoutDividerStyle"
+                    android:layout_below="@id/linearlayout_animation" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/linearlayout_animation"
                     android:orientation="horizontal">
 
                     <Switch
@@ -280,9 +311,9 @@
 
                 </LinearLayout>
 
-                <!--LinearLayout divider-3-->
+                <!--LinearLayout divider-4-->
                 <LinearLayout
-                    android:id="@+id/linearlayout_divider3"
+                    android:id="@+id/linearlayout_divider4"
                     style="@style/LinearLayoutDividerStyle"
                     android:layout_below="@id/linearlayout_filter" />
 

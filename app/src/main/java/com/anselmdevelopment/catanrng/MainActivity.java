@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import safety.com.br.android_shake_detector.core.ShakeCallback;
 import safety.com.br.android_shake_detector.core.ShakeDetector;
 import safety.com.br.android_shake_detector.core.ShakeOptions;
 
+import static com.anselmdevelopment.catanrng.SettingsActivity.ANIMATE;
 import static com.anselmdevelopment.catanrng.SettingsActivity.DUPLICATE;
 //import static com.anselmdevelopment.catanrng.SettingsActivity.EXCLUDE7;
 import static com.anselmdevelopment.catanrng.SettingsActivity.RADIO1;
@@ -37,6 +39,7 @@ import static com.anselmdevelopment.catanrng.SettingsActivity.SHAKE;
 public class MainActivity extends AppCompatActivity {
 
     int number;
+    int animation;
     public static final ArrayList<String> history = new ArrayList<>();
     public static String hist = null;
     public boolean isSpinMethod1;
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean isDuplicateNumberFilter;
     //    public boolean isExclude7;
     private TextView mRandomNumber;
-    private TextView mSpinButton;
+    private TextView mGenerateButton;
     private ShakeDetector shakeDetector; // Do not delete
 
     @Override
@@ -56,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mRandomNumber = findViewById(R.id.random_number);
-        mSpinButton = findViewById(R.id.spin_button);
+        mGenerateButton = findViewById(R.id.spin_button);
+        animation = 1;
 
         final ImageView optionsMenu = findViewById(R.id.options_menu);
         // Sets onClickListener on the options ImageView
@@ -138,19 +142,114 @@ public class MainActivity extends AppCompatActivity {
             public void onShake() {
                 isShake = FastSave.getInstance().getBoolean(SHAKE, false); // Get boolean stored with FastSave
                 if (isShake) {
-                    spin();
+                    if (FastSave.getInstance().getBoolean(ANIMATE, true)) {
+                        animate();
+                    }
+                    generateRandomNumber();
                     vibrate();
                 }
             }
         });
 
         // Set onClickListener on the spin button_background
-        mSpinButton.setOnClickListener(new View.OnClickListener() {
+        mGenerateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spin();
+                if (FastSave.getInstance().getBoolean(ANIMATE, true)) {
+                    animate();
+                }
+                generateRandomNumber();
             }
         });
+    }
+
+    public void animate() {
+        int delay = 1;
+        if (animation == 1) {
+            mRandomNumber.setText("5");
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("2");
+                }
+            }, delay + 75);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("10");
+                }
+            }, delay + 150);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("1");
+                }
+            }, delay + 225);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("4");
+                }
+            }, delay + 300);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("12");
+                }
+            }, delay + 375);
+            animation = 2;
+        } else if (animation == 2) {
+            mRandomNumber.setText("11");
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("6");
+                }
+            }, delay + 75);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("9");
+                }
+            }, delay + 150);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("7");
+                }
+            }, delay + 225);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("1");
+                }
+            }, delay + 300);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("3");
+                }
+            }, delay + 375);
+            animation = 3;
+        } else if (animation == 3) {
+            mRandomNumber.setText("7");
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("8");
+                }
+            }, delay + 75);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("12");
+                }
+            }, delay + 150);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("4");
+                }
+            }, delay + 225);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("6");
+                }
+            }, delay + 300);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText("9");
+                }
+            }, delay + 375);
+            animation = 1;
+        }
     }
 
     // Generate a random number according to spin method 1
@@ -180,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
         return sum;
     }
 
-    public void spin() {
+    public void generateRandomNumber() {
         isVibrate = FastSave.getInstance().getBoolean(VIBRATE, false);
         isSpinMethod1 = FastSave.getInstance().getBoolean(RADIO1, true);
         isSpinMethod2 = FastSave.getInstance().getBoolean(RADIO2, false);
@@ -238,7 +337,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setRandomNumberText(int i) {
-        mRandomNumber.setText(Integer.toString(i));
+        final int x = i;
+        if (FastSave.getInstance().getBoolean(ANIMATE, true)) {
+            int delay = 1;
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    mRandomNumber.setText(Integer.toString(x));
+                }
+            }, delay + 500);
+        } else {
+            mRandomNumber.setText(Integer.toString(x));
+        }
+
     }
 
     public void vibrate() {
