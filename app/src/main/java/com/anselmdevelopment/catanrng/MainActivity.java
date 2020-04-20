@@ -1,22 +1,18 @@
 package com.anselmdevelopment.catanrng;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appizona.yehiahd.fastsave.FastSave;
@@ -30,7 +26,6 @@ import safety.com.br.android_shake_detector.core.ShakeOptions;
 
 import static com.anselmdevelopment.catanrng.SettingsActivity.ANIMATE;
 import static com.anselmdevelopment.catanrng.SettingsActivity.DUPLICATE;
-//import static com.anselmdevelopment.catanrng.SettingsActivity.EXCLUDE7;
 import static com.anselmdevelopment.catanrng.SettingsActivity.EXCLUDE7;
 import static com.anselmdevelopment.catanrng.SettingsActivity.RADIO1;
 import static com.anselmdevelopment.catanrng.SettingsActivity.RADIO2;
@@ -48,10 +43,26 @@ public class MainActivity extends AppCompatActivity {
     public boolean isVibrate;
     public boolean isShake;
     public boolean isDuplicateNumberFilter;
-    //    public boolean isExclude7;
+    public boolean menuVisible;
+    public boolean historyVisible;
     private TextView mRandomNumber;
     private TextView mGenerateButton;
     private ShakeDetector shakeDetector; // Do not delete
+    ConstraintLayout constraintLayoutMenu;
+    ConstraintLayout constraintLayoutHistory;
+
+    @Override
+    public void onBackPressed() {
+        if (menuVisible) {
+            constraintLayoutMenu.setVisibility(View.GONE);
+            menuVisible = false;
+        } else if (historyVisible) {
+            constraintLayoutHistory.setVisibility(View.GONE);
+            historyVisible = false;
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,73 +72,158 @@ public class MainActivity extends AppCompatActivity {
 
         mRandomNumber = findViewById(R.id.random_number);
         mGenerateButton = findViewById(R.id.spin_button);
+        constraintLayoutHistory = findViewById(R.id.constraintlayout_history);
         animation = 1;
+        menuVisible = false;
+        historyVisible = false;
 
         final ImageView optionsMenu = findViewById(R.id.options_menu);
-        // Sets onClickListener on the options ImageView
         optionsMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // Create instance of PopupMenu
-                Context wrapper = new ContextThemeWrapper(MainActivity.this, R.style.popupMenuStyle);
-                final PopupMenu popupMenu = new PopupMenu(wrapper, optionsMenu);
+                constraintLayoutMenu = findViewById(R.id.constraintlayout_menu);
+                constraintLayoutMenu.setVisibility(View.VISIBLE);
+                menuVisible = true;
 
-                // Inflate the popup menu using xml file
-                popupMenu.getMenuInflater().inflate(R.menu.menu_main, popupMenu.getMenu());
+                TextView tvgameOverView = findViewById(R.id.tv_gameoverview);
+                TextView tvhistory = findViewById(R.id.tv_history);
+                TextView tvsettings = findViewById(R.id.tv_settings);
+                TextView tvabout = findViewById(R.id.tv_about);
 
-                // Register popup with OnMenuItemClickListener
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                LinearLayout topll = findViewById(R.id.linearlayout_top);
+                LinearLayout leftll = findViewById(R.id.linearlayout_left);
+                LinearLayout rightll = findViewById(R.id.linearlayout_right);
+                LinearLayout bottomll = findViewById(R.id.linearlayout_bottom);
+
+                tvgameOverView.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        int id = item.getItemId();
-                        if (id == R.id.action_gameoverview) {
-                            Intent gameOverviewActivity = new Intent(MainActivity.this, GameOverviewActivity.class);
-                            startActivity(gameOverviewActivity);
-                            return true;
-                        } else if (id == R.id.action_history) {
-                            if (history.isEmpty()) {
-                                hist = "No history";
-                            } else {
-                                hist = history.toString().replace("[", "").replace("]", "");
-                            }
-                            final AlertDialog dialog = new AlertDialog
-                                    .Builder(MainActivity.this)
-                                    .setTitle("History")
-                                    .setMessage(String.valueOf(hist))
-                                    .setPositiveButton(android.R.string.ok, null)
-                                    .setNeutralButton("Clear", null)
-                                    .create();
-
-                            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-
-                                @Override
-                                public void onShow(DialogInterface dialogInterface) {
-
-                                    Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
-                                    button.setOnClickListener(new View.OnClickListener() {
-
-                                        @Override
-                                        public void onClick(View view) {
-                                            history.clear();
-                                            dialog.setMessage("No history");
-                                        }
-                                    });
-                                }
-                            });
-                            dialog.show();
-                        } else if (id == R.id.action_settings) {
-                            Intent settingsActivity = new Intent(MainActivity.this, SettingsActivity.class);
-                            startActivity(settingsActivity);
-                        } else if (id == R.id.action_about) {
-                            Intent aboutAppActivity = new Intent(MainActivity.this, AboutActivity.class);
-                            startActivity(aboutAppActivity);
-                            return true;
-                        }
-                        return false;
+                    public void onClick(View v) {
+                        startActivity(new Intent(MainActivity.this, GameOverviewActivity.class));
+                        hideMenuWithDelay();
                     }
                 });
-                popupMenu.show();
+
+                tvhistory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hideMenu();
+
+                        final TextView tvHistoryNumbers = findViewById(R.id.tv_infotext);
+                        TextView ok = findViewById(R.id.tv_ok);
+                        TextView clear = findViewById(R.id.tv_clear);
+
+                        LinearLayout top2 = findViewById(R.id.linearlayout_top2);
+                        LinearLayout left2 = findViewById(R.id.linearlayout_left2);
+                        LinearLayout right2 = findViewById(R.id.linearlayout_right2);
+                        LinearLayout bottom2 = findViewById(R.id.linearlayout_bottom2);
+
+                        if (history.isEmpty()) {
+                            hist = "No history";
+                        } else {
+                            /* Put the values of the ArrayList history into the String hist and replace
+                            the [ and ] with nothing so they don't appear in the history dialog */
+                            hist = history.toString().replace("[", "").replace("]", "");
+                        }
+
+                        tvHistoryNumbers.setText(hist);
+                        constraintLayoutHistory.setVisibility(View.VISIBLE);
+                        historyVisible = true;
+
+                        ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                int num = 1;
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        constraintLayoutHistory.setVisibility(View.GONE);
+                                    }
+                                }, num * 100);
+                            }
+                        });
+
+                        clear.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                history.clear();
+                                tvHistoryNumbers.setText("No history");
+                            }
+                        });
+
+                        top2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                hideHistory();
+                            }
+                        });
+
+                        left2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                hideHistory();
+                            }
+                        });
+
+                        right2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                hideHistory();
+                            }
+                        });
+
+                        bottom2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                hideHistory();
+                            }
+                        });
+                    }
+                });
+
+                tvsettings.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                        hideMenuWithDelay();
+                    }
+                });
+
+                tvabout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                        hideMenuWithDelay();
+                    }
+                });
+
+                topll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hideMenu();
+                    }
+                });
+
+                leftll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hideMenu();
+                    }
+                });
+
+                rightll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hideMenu();
+                    }
+                });
+
+                bottomll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hideMenu();
+                    }
+                });
             }
         });
 
@@ -162,6 +258,28 @@ public class MainActivity extends AppCompatActivity {
                 generateRandomNumber();
             }
         });
+    }
+
+    public void hideMenu() {
+        constraintLayoutMenu.setVisibility(View.GONE);
+        menuVisible = false;
+    }
+
+    public void hideMenuWithDelay() {
+        final ConstraintLayout constraintLayoutMenu = findViewById(R.id.constraintlayout_menu);
+        int num = 1;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                constraintLayoutMenu.setVisibility(View.GONE);
+            }
+        }, num * 250);
+        menuVisible = false;
+    }
+
+    public void hideHistory() {
+        constraintLayoutHistory.setVisibility(View.GONE);
+        historyVisible = false;
     }
 
     public void animate() {
@@ -253,8 +371,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Generate a random number according to spin method 1
-    public int spinMethod1() {
+    // Generate a random number according to generate method 1
+    public int generateMethod1() {
         int min = 1;
         int max = 6;
         Random random = new Random();
@@ -262,8 +380,8 @@ public class MainActivity extends AppCompatActivity {
         return randomNumber;
     }
 
-    // Generate a random number according to spin method 2
-    public int spinMethod2() {
+    // Generate a random number according to generate method 2
+    public int generateMethod2() {
         int min = 2;
         int max = 12;
         Random random = new Random();
@@ -273,19 +391,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public int addIntsMethod1() {
-        int number1 = spinMethod1();
-        int number2 = spinMethod1();
+        int number1 = generateMethod1();
+        int number2 = generateMethod1();
         int sum = number1 + number2;
         history.add(String.valueOf(sum));
         return sum;
     }
 
     public void generateRandomNumber() {
-        isVibrate = FastSave.getInstance().getBoolean(VIBRATE, false);
+        isVibrate = FastSave.getInstance().getBoolean(VIBRATE, true);
         isSpinMethod1 = FastSave.getInstance().getBoolean(RADIO1, true);
         isSpinMethod2 = FastSave.getInstance().getBoolean(RADIO2, false);
         isDuplicateNumberFilter = FastSave.getInstance().getBoolean(DUPLICATE, true);
-//        isExclude7 = FastSave.getInstance().getBoolean(EXCLUDE7, false);
         if (isVibrate) {
             vibrate();
         }
@@ -315,11 +432,11 @@ public class MainActivity extends AppCompatActivity {
             // Spin method 2
         } else if (isSpinMethod2) { // If method 2 is selected
             if (isDuplicateNumberFilter) {
-                int rn = spinMethod2();
+                int rn = generateMethod2();
                 if (rn == number) {
-                    int r1 = spinMethod2();
+                    int r1 = generateMethod2();
                     if (r1 == number) {
-                        int n1 = spinMethod2();
+                        int n1 = generateMethod2();
                         setRandomNumberText(n1);
                         number = n1;
                     } else {
@@ -331,7 +448,7 @@ public class MainActivity extends AppCompatActivity {
                     number = rn;
                 }
             } else {
-                int random = spinMethod2();
+                int random = generateMethod2();
                 setRandomNumberText(random);
             }
         }
@@ -376,8 +493,6 @@ public class MainActivity extends AppCompatActivity {
     // Hides the status bar
     private void hideSystemUI() {
         // Enables regular immersive mode.
-        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
-        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY

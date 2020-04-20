@@ -7,44 +7,46 @@
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#B71C1C"
-        android:elevation="4dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="4dp">
 
-        <FrameLayout
-            android:id="@+id/about_back_arrow"
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="24dp"
+                android:id="@+id/iv_backArrow"
+                android:layout_width="56dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:padding="16dp"
                 android:src="@drawable/back_arrow_white" />
 
-        </FrameLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="56dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="@string/about_catan_rng"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="50dp"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:text="@string/about_catan_spinner"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+        </LinearLayout>
 
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.25"></LinearLayout>
+        android:layout_weight="0.2"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,7 +58,7 @@
             android:layout_width="112dp"
             android:layout_height="112dp"
             android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/catan_round_512x512" />
 
         <TextView
             android:layout_width="match_parent"
@@ -74,7 +76,7 @@
             android:gravity="center"
             android:text="@string/version_number_text"
             android:textColor="#BDBDBD"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -83,7 +85,7 @@
             android:gravity="center"
             android:text="@string/developed_maintained_by"
             android:textColor="#BDBDBD"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -100,33 +102,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingBottom="8dp"
         android:text="@string/comments"
         android:textColor="@color/colorTextLight"
-        android:textSize="18sp" />
+        android:textSize="17sp" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="208dp"
-        android:layout_height="32dp"
-        android:layout_gravity="center_horizontal"
+    <LinearLayout
+        android:id="@+id/linearlayout_send_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp">
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:padding="4dp">
 
         <TextView
-            android:id="@+id/textview_feedback"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/colorTextLight"
-            android:clickable="true"
-            android:fontFamily="sans-serif-black"
-            android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center"
-            android:text="@string/send_feedback"
-            android:textAllCaps="true"
-            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/send_email"
+            android:textColor="@android:color/white"
             android:textSize="18sp" />
 
-    </androidx.cardview.widget.CardView>
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/arrow_right" />
+
+    </LinearLayout>
 
 </LinearLayout>

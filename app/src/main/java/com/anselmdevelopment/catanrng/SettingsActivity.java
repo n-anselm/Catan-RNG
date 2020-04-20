@@ -1,18 +1,24 @@
 package com.anselmdevelopment.catanrng;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.appizona.yehiahd.fastsave.FastSave;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    TextView infoTitle;
+    TextView infoText;
+    TextView ok;
     RadioButton radioButton1;
     RadioButton radioButton2;
     Switch vibrateSwitch;
@@ -26,7 +32,8 @@ public class SettingsActivity extends AppCompatActivity {
     public boolean isShake;
     public boolean isAnimate;
     public boolean isDuplicate;
-        public boolean isExlude7;
+    public boolean isExlude7;
+    public boolean infoVisible;
     public static final String RADIO1 = "radio1";
     public static final String RADIO2 = "radio2";
     public static final String SHAKE = "shake";
@@ -34,10 +41,15 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String ANIMATE = "animate";
     public static final String DUPLICATE = "duplicate";
     public static final String EXCLUDE7 = "exclude7Switch";
+    ConstraintLayout constraintLayoutInfo;
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (infoVisible) {
+            hideInfo();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -53,14 +65,20 @@ public class SettingsActivity extends AppCompatActivity {
         animateSwitch = findViewById(R.id.switch_animate);
         dNumberSwitch = findViewById(R.id.switch_duplicate);
         exclude7Switch = findViewById(R.id.switch_exclude7);
+        constraintLayoutInfo = findViewById(R.id.constraintlayout_info);
+        infoTitle = findViewById(R.id.tv_infotitle);
+        infoText = findViewById(R.id.tv_infotext);
+        ok = findViewById(R.id.tv_ok);
 
         isRadio1 = FastSave.getInstance().getBoolean(RADIO1, true);
         isRadio2 = FastSave.getInstance().getBoolean(RADIO2, false);
-        isVibrate = FastSave.getInstance().getBoolean(VIBRATE, false);
+        isVibrate = FastSave.getInstance().getBoolean(VIBRATE, true);
         isShake = FastSave.getInstance().getBoolean(SHAKE, false);
         isAnimate = FastSave.getInstance().getBoolean(ANIMATE, true);
         isDuplicate = FastSave.getInstance().getBoolean(DUPLICATE, true);
         isExlude7 = FastSave.getInstance().getBoolean(EXCLUDE7, false);
+
+        infoVisible = false;
 
         if (isRadio1) {
             radioButton1.setChecked(true);
@@ -118,10 +136,10 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (vibrateSwitch.isChecked()) { // If the shake switch is set to "ON" position
-                    isVibrate = true; // Set boolean "isShake" to true
+                    isVibrate = true; // Set boolean "isVibrate" to true
                     FastSave.getInstance().saveBoolean(VIBRATE, isVibrate); // Save the switch position
                 } else {
-                    isVibrate = false; // Else set "isShake" to false
+                    isVibrate = false; // Else set "isVibrate" to false
                     FastSave.getInstance().saveBoolean(VIBRATE, isVibrate); // Save the switch position
                 }
             }
@@ -179,8 +197,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        FrameLayout backArrow = findViewById(R.id.settings_back_arrow);
-        // Sets onClickListener on the back arrow
+        ImageView backArrow = findViewById(R.id.iv_backArrow);
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,88 +205,135 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        FrameLayout info1 = findViewById(R.id.framelayout_info1);
+        ImageView info1 = findViewById(R.id.iv_info1);
         info1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("1st Generation Method")
-                        .setMessage(R.string.info_method1)
-                        .setPositiveButton("Ok", null)
-                        .create().show();
+                infoTitle.setText("1st Generation Method");
+                infoText.setText(R.string.info_method1);
+                showInfo();
             }
         });
 
-        FrameLayout info2 = findViewById(R.id.framelayout_info2);
+        ImageView info2 = findViewById(R.id.iv_info2);
         info2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("2nd Generation Method")
-                        .setMessage(R.string.info_method2)
-                        .setPositiveButton("Ok", null)
-                        .create().show();
+                infoTitle.setText("2nd Generation Method");
+                infoText.setText(R.string.info_method2);
+                showInfo();
             }
         });
 
-        FrameLayout vibrateInfo = findViewById(R.id.framelayout_info_vibrate);
+        ImageView vibrateInfo = findViewById(R.id.iv_info_vibrate);
         vibrateInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("Vibrate")
-                        .setMessage(R.string.info_vibrate)
-                        .setPositiveButton("Ok", null)
-                        .create().show();
+                infoTitle.setText("Vibrate");
+                infoText.setText(R.string.info_vibrate);
+                showInfo();
             }
         });
 
-        FrameLayout shakeInfo = findViewById(R.id.framelayout_info_shake);
+        ImageView shakeInfo = findViewById(R.id.iv_info_shake);
         shakeInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("Shake")
-                        .setMessage(R.string.info_shake)
-                        .setPositiveButton("Ok", null)
-                        .create().show();
+                infoTitle.setText("Shake");
+                infoText.setText(R.string.info_shake);
+                showInfo();
             }
         });
 
-        FrameLayout animateInfo = findViewById(R.id.framelayout_info_animate);
+        ImageView animateInfo = findViewById(R.id.iv_info_animation);
         animateInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("Animation")
-                        .setMessage(R.string.info_animate)
-                        .setPositiveButton("Ok", null)
-                        .create().show();
+                infoTitle.setText("Animation");
+                infoText.setText(R.string.info_animate);
+                showInfo();
             }
         });
 
-        FrameLayout dnfInfo = findViewById(R.id.framelayout_info_filter);
+        ImageView dnfInfo = findViewById(R.id.iv_info_duplicate);
         dnfInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("Duplicate number filter")
-                        .setMessage(R.string.info_duplicate_number_filter)
-                        .setPositiveButton("Ok", null)
-                        .create().show();
+                infoTitle.setText("Duplicate number filter");
+                infoText.setText(R.string.info_duplicate_number_filter);
+                showInfo();
             }
         });
 
-        FrameLayout exclude7Info = findViewById(R.id.framelayout_info_exclude7);
+        ImageView exclude7Info = findViewById(R.id.iv_info_exclude7);
         exclude7Info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setTitle("Exclude 7")
-                        .setMessage(R.string.info_exclude7)
-                        .setPositiveButton("Ok", null)
-                        .create().show();
+                infoTitle.setText("Exclude 7");
+                infoText.setText(R.string.info_exclude7);
+                showInfo();
             }
         });
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideInfoWithDelay();
+            }
+        });
+
+        LinearLayout top = findViewById(R.id.linearlayout_top3);
+        LinearLayout left = findViewById(R.id.linearlayout_left3);
+        LinearLayout right = findViewById(R.id.linearlayout_right3);
+        LinearLayout bottom = findViewById(R.id.linearlayout_bottom3);
+
+        top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideInfo();
+            }
+        });
+
+        left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideInfo();
+            }
+        });
+
+        right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideInfo();
+            }
+        });
+
+        bottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideInfo();
+            }
+        });
+    }
+
+    public void showInfo() {
+        constraintLayoutInfo.setVisibility(View.VISIBLE);
+        infoVisible = true;
+    }
+
+    public void hideInfo() {
+        constraintLayoutInfo.setVisibility(View.GONE);
+        infoVisible = false;
+    }
+
+    public void hideInfoWithDelay() {
+        int num = 1;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                constraintLayoutInfo.setVisibility(View.GONE);
+            }
+        }, num * 100);
+        infoVisible = false;
     }
 }

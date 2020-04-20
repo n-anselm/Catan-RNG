@@ -26,6 +26,6 @@
     <item
         android:id="@+id/action_about"
         android:orderInCategory="3"
-        android:title="@string/about_catan_spinner"
+        android:title="@string/about_catan_rng"
         app:showAsAction="never" />
 </menu>

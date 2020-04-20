@@ -8,6 +8,8 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import spencerstudios.com.bungeelib.Bungee;
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
@@ -21,6 +23,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                Bungee.fade(SplashScreenActivity.this);
                 finish();
             }
         }, secondsDelayed * 1250);

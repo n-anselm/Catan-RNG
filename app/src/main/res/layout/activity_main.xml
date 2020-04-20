@@ -1,82 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@drawable/catan"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.30">
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/random_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center_horizontal"
-        android:text="0"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="136sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginBottom="52dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.30">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/random_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_horizontal"
+            android:text="0"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="136sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginBottom="52dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"></LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.1"
+                android:elevation="4dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
+
+                <TextView
+                    android:id="@+id/spin_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent"
+                    android:clickable="true"
+                    android:fontFamily="sans-serif-black"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:text="Generate"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="30sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/options_menu"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/menu" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#50000000"
+        android:elevation="4dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearlayout_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="1.5" />
+
+        <LinearLayout
+            android:id="@+id/linearlayout_left"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"></LinearLayout>
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout_bottom"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/linearlayout_menu"
+            app:layout_constraintTop_toBottomOf="@id/linearlayout_top" />
+
+        <LinearLayout
+            android:id="@+id/linearlayout_right"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout_bottom"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/linearlayout_menu"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearlayout_top" />
 
         <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.1"
-            android:elevation="4dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="8dp">
+            android:id="@+id/linearlayout_menu"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearlayout_top">
 
-            <TextView
-                android:id="@+id/spin_button"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorAccent"
-                android:clickable="true"
-                android:fontFamily="sans-serif-black"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:gravity="center"
-                android:text="Generate"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="32sp" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_gameoverview"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:text="@string/game_overview"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/colorTextLight" />
+
+                <TextView
+                    android:id="@+id/tv_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:text="@string/history"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/colorTextLight" />
+
+                <TextView
+                    android:id="@+id/tv_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:text="@string/settings"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/colorTextLight" />
+
+                <TextView
+                    android:id="@+id/tv_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:text="@string/about_catan_rng"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/options_menu"
+        <LinearLayout
+            android:id="@+id/linearlayout_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearlayout_menu"
+            app:layout_constraintVertical_weight="1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#50000000"
+        android:elevation="4dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearlayout_top2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout_info"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="1.5" />
+
+        <LinearLayout
+            android:id="@+id/linearlayout_left2"
             android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:src="@drawable/menu" />
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout_bottom2"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/linearlayout_info"
+            app:layout_constraintTop_toBottomOf="@id/linearlayout_top2" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearlayout_right2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout_bottom2"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/linearlayout_info"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearlayout_top2" />
 
-</LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/linearlayout_info"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toTopOf="@id/linearlayout_bottom2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearlayout_top2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_topinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="112dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="@string/history"
+                        android:textSize="20sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@color/colorTextLight" />
+
+                    <TextView
+                        android:id="@+id/tv_infotext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text=""
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/linearlayout_topinfo">
+
+                    <TextView
+                        android:id="@+id/tv_clear"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:text="CLEAR"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/colorTextLight" />
+
+                    <TextView
+                        android:id="@+id/tv_ok"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:text="OK"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_bottom2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearlayout_info"
+            app:layout_constraintVertical_weight="1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

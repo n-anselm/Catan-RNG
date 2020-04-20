@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,8 +19,7 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        FrameLayout backArrow = findViewById(R.id.about_back_arrow);
-        // Sets onClickListener on the back arrow
+        ImageView backArrow = findViewById(R.id.iv_backArrow);
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,8 +27,8 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
-        TextView emailAddress = findViewById(R.id.textview_feedback);
-        emailAddress.setOnClickListener(new View.OnClickListener() {
+        LinearLayout sendEmail = findViewById(R.id.linearlayout_send_email);
+        sendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 composeEmail(mEmailAddress, mSubject);
