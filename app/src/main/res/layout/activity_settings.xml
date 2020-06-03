@@ -33,14 +33,26 @@
                     android:src="@drawable/back_arrow_white" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="56dp"
+                    android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="@string/settings"
                     android:textColor="@android:color/white"
                     android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/imageview_info"
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_info">
+
+                </ImageView>
 
             </LinearLayout>
 
@@ -82,7 +94,7 @@
                             android:text="@string/number_generation_method"
                             android:textAllCaps="true"
                             android:textColor="@color/colorTextLight"
-                            android:textSize="20sp" />
+                            android:textSize="18sp" />
 
                         <View
                             android:id="@+id/view_divider1"
@@ -93,19 +105,9 @@
                             android:layout_marginRight="4dp"
                             android:background="@color/colorTextLight" />
 
-                        <View
-                            android:id="@+id/view_dividerwhite1"
-                            android:layout_width="match_parent"
-                            android:layout_height="0.75dp"
-                            android:layout_below="@id/textview_spin_method"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginTop="57dp"
-                            android:layout_marginRight="4dp"
-                            android:background="@color/colorTextLight" />
-
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="113dp"
+                            android:layout_height="wrap_content"
                             android:layout_below="@id/view_divider1">
 
                             <RadioGroup
@@ -115,63 +117,38 @@
                                 android:layout_weight="1">
 
                                 <RadioButton
-                                    android:id="@+id/radioButton1"
+                                    android:id="@+id/radiobutton1"
+                                    style="@style/RadioButtonStyle"
+                                    android:text="AI Generation" />
+
+                                <View
+                                    android:id="@+id/view_dividerwhite1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0.75dp"
+                                    android:layout_marginLeft="4dp"
+                                    android:layout_marginRight="4dp"
+                                    android:background="@color/colorTextLight" />
+
+                                <RadioButton
+                                    android:id="@+id/radiobutton2"
                                     style="@style/RadioButtonStyle"
                                     android:text="2x  1 - 6" />
 
+                                <View
+                                    android:id="@+id/view_dividerwhite2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0.75dp"
+                                    android:layout_marginLeft="4dp"
+                                    android:layout_marginRight="4dp"
+                                    android:background="@color/colorTextLight" />
+
                                 <RadioButton
-                                    android:id="@+id/radioButton2"
+                                    android:id="@+id/radiobutton3"
                                     style="@style/RadioButtonStyle"
                                     android:text="1x  2 - 12" />
 
                             </RadioGroup>
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <!--Info 1-->
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center">
-
-                                    <ImageView
-                                        android:id="@+id/iv_info1"
-                                        android:layout_width="36dp"
-                                        android:layout_height="36dp"
-                                        android:layout_gravity="center"
-                                        android:layout_margin="4dp"
-                                        android:clickable="true"
-                                        android:foreground="?android:attr/selectableItemBackground"
-                                        android:padding="5dp"
-                                        android:src="@drawable/ic_info" />
-
-                                </LinearLayout>
-
-                                <!--Info 2-->
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center">
-
-                                    <ImageView
-                                        android:id="@+id/iv_info2"
-                                        android:layout_width="36dp"
-                                        android:layout_height="36dp"
-                                        android:layout_gravity="center"
-                                        android:layout_margin="4dp"
-                                        android:clickable="true"
-                                        android:foreground="?android:attr/selectableItemBackground"
-                                        android:padding="5dp"
-                                        android:src="@drawable/ic_info" />
-
-                                </LinearLayout>
-
-                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -190,11 +167,11 @@
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp">
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:layout_marginRight="8dp">
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/textview_other"
@@ -206,175 +183,47 @@
                             android:text="@string/general"
                             android:textAllCaps="true"
                             android:textColor="@color/colorTextLight"
-                            android:textSize="20sp" />
+                            android:textSize="18sp" />
 
                         <View
-                            android:id="@+id/view_divider2"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:layout_below="@id/textview_other"
                             android:layout_marginLeft="12dp"
-                            android:layout_marginRight="4dp"
+                            android:layout_marginRight="12dp"
                             android:background="@color/colorTextLight" />
 
-                        <LinearLayout
-                            android:id="@+id/linearlayout_vibrate"
-                            android:layout_width="match_parent"
-                            android:layout_height="56dp"
-                            android:layout_below="@id/view_divider2"
-                            android:orientation="horizontal">
+                        <Switch
+                            android:id="@+id/switch_vibrate"
+                            style="@style/SwitchStyle"
+                            android:paddingRight="8dp"
+                            android:text="@string/vibrate" />
 
-                            <Switch
-                                android:id="@+id/switch_vibrate"
-                                style="@style/SwitchStyle"
-                                android:text="@string/vibrate" />
+                        <View style="@style/LinearLayoutDividerStyle" />
 
-                            <ImageView
-                                android:id="@+id/iv_info_vibrate"
-                                android:layout_width="36dp"
-                                android:layout_height="36dp"
-                                android:layout_gravity="center"
-                                android:layout_margin="4dp"
-                                android:clickable="true"
-                                android:foreground="?android:attr/selectableItemBackground"
-                                android:padding="5dp"
-                                android:src="@drawable/ic_info" />
+                        <Switch
+                            android:id="@+id/switch_animate"
+                            style="@style/SwitchStyle"
+                            android:paddingRight="8dp"
+                            android:text="@string/animation" />
 
-                        </LinearLayout>
+                        <View style="@style/LinearLayoutDividerStyle" />
 
-                        <!--LinearLayout divider-1-->
-                        <LinearLayout
-                            android:id="@+id/linearlayout_divider1"
-                            style="@style/LinearLayoutDividerStyle"
-                            android:layout_below="@id/linearlayout_vibrate" />
+<!--                        <Switch-->
+<!--                            android:id="@+id/switch_duplicate"-->
+<!--                            style="@style/SwitchStyle"-->
+<!--                            android:paddingRight="8dp"-->
+<!--                            android:text="@string/filter" />-->
 
-                        <LinearLayout
-                            android:id="@+id/linearlayout_shake"
-                            android:layout_width="match_parent"
-                            android:layout_height="56dp"
-                            android:layout_below="@id/linearlayout_vibrate"
-                            android:orientation="horizontal">
+<!--                        <LinearLayout style="@style/LinearLayoutDividerStyle" />-->
 
-                            <Switch
-                                android:id="@+id/switch_shake"
-                                style="@style/SwitchStyle"
-                                android:text="@string/shake" />
+                        <Switch
+                            android:id="@+id/switch_exclude7"
+                            style="@style/SwitchStyle"
+                            android:paddingRight="8dp"
+                            android:text="@string/exclude7" />
 
-                            <ImageView
-                                android:id="@+id/iv_info_shake"
-                                android:layout_width="36dp"
-                                android:layout_height="36dp"
-                                android:layout_gravity="center"
-                                android:layout_margin="4dp"
-                                android:clickable="true"
-                                android:foreground="?android:attr/selectableItemBackground"
-                                android:padding="5dp"
-                                android:src="@drawable/ic_info" />
-
-                        </LinearLayout>
-
-                        <!--LinearLayout divider-2-->
-                        <LinearLayout
-                            android:id="@+id/linearlayout_divider2"
-                            style="@style/LinearLayoutDividerStyle"
-                            android:layout_below="@id/linearlayout_shake" />
-
-                        <LinearLayout
-                            android:id="@+id/linearlayout_animation"
-                            android:layout_width="match_parent"
-                            android:layout_height="56dp"
-                            android:layout_below="@id/linearlayout_shake"
-                            android:orientation="horizontal">
-
-                            <Switch
-                                android:id="@+id/switch_animate"
-                                style="@style/SwitchStyle"
-                                android:text="@string/animation" />
-
-                            <ImageView
-                                android:id="@+id/iv_info_animation"
-                                android:layout_width="36dp"
-                                android:layout_height="36dp"
-                                android:layout_gravity="center"
-                                android:layout_margin="4dp"
-                                android:clickable="true"
-                                android:foreground="?android:attr/selectableItemBackground"
-                                android:padding="5dp"
-                                android:src="@drawable/ic_info" />
-
-                        </LinearLayout>
-
-                        <!--LinearLayout divider-3-->
-                        <LinearLayout
-                            android:id="@+id/linearlayout_divider3"
-                            style="@style/LinearLayoutDividerStyle"
-                            android:layout_below="@id/linearlayout_animation" />
-
-                        <LinearLayout
-                            android:id="@+id/linearlayout_filter"
-                            android:layout_width="match_parent"
-                            android:layout_height="56dp"
-                            android:layout_below="@id/linearlayout_animation"
-                            android:orientation="horizontal">
-
-                            <Switch
-                                android:id="@+id/switch_duplicate"
-                                style="@style/SwitchStyle"
-                                android:text="@string/filter" />
-
-                            <ImageView
-                                android:id="@+id/iv_info_duplicate"
-                                android:layout_width="36dp"
-                                android:layout_height="36dp"
-                                android:layout_gravity="center"
-                                android:layout_margin="4dp"
-                                android:clickable="true"
-                                android:foreground="?android:attr/selectableItemBackground"
-                                android:padding="5dp"
-                                android:src="@drawable/ic_info" />
-
-                        </LinearLayout>
-
-                        <!--LinearLayout divider-4-->
-                        <LinearLayout
-                            android:id="@+id/linearlayout_divider4"
-                            style="@style/LinearLayoutDividerStyle"
-                            android:layout_below="@id/linearlayout_filter" />
-
-                        <LinearLayout
-                            android:id="@+id/linearlayout_exclude7"
-                            android:layout_width="match_parent"
-                            android:layout_height="56dp"
-                            android:layout_below="@id/linearlayout_filter"
-                            android:orientation="horizontal">
-
-                            <Switch
-                                android:id="@+id/switch_exclude7"
-                                style="@style/SwitchStyle"
-                                android:text="@string/exclude7" />
-
-                            <ImageView
-                                android:id="@+id/iv_info_exclude7"
-                                android:layout_width="36dp"
-                                android:layout_height="36dp"
-                                android:layout_gravity="center"
-                                android:layout_margin="4dp"
-                                android:clickable="true"
-                                android:foreground="?android:attr/selectableItemBackground"
-                                android:padding="5dp"
-                                android:src="@drawable/ic_info" />
-
-                        </LinearLayout>
-
-                        <!--LinearLayout divider-5-->
-                        <LinearLayout
-                            android:id="@+id/linearlayout_divider5"
-                            style="@style/LinearLayoutDividerStyle"
-                            android:layout_below="@id/linearlayout_exclude7"
-                            android:layout_marginBottom="8dp"
-                            android:visibility="gone" />
-
-                    </RelativeLayout>
+                    </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
 

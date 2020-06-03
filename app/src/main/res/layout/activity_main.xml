@@ -58,7 +58,7 @@
                 app:cardElevation="8dp">
 
                 <TextView
-                    android:id="@+id/spin_button"
+                    android:id="@+id/generate_button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/colorAccent"
