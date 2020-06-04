@@ -119,7 +119,7 @@
                                 <RadioButton
                                     android:id="@+id/radiobutton1"
                                     style="@style/RadioButtonStyle"
-                                    android:text="AI Generation" />
+                                    android:text="AI" />
 
                                 <View
                                     android:id="@+id/view_dividerwhite1"

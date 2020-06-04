@@ -24,11 +24,9 @@ public class SettingsActivity extends AppCompatActivity {
     RadioButton radioButton3;
     Switch vibrateSwitch;
     Switch animateSwitch;
-//    Switch dNumberSwitch;
     Switch exclude7Switch;
     public boolean isVibrate;
     public boolean isAnimate;
-//    public boolean isDuplicate;
     public boolean isExlude7;
     public boolean infoVisible;
     public static final String RADIO1 = "radio1";
@@ -36,7 +34,6 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String RADIO3 = "radio3";
     public static final String VIBRATE = "vibrate";
     public static final String ANIMATE = "animate";
-//    public static final String DUPLICATE = "duplicate";
     public static final String EXCLUDE7 = "exclude7Switch";
     ConstraintLayout constraintLayoutInfo;
 
@@ -60,7 +57,6 @@ public class SettingsActivity extends AppCompatActivity {
         radioButton3 = findViewById(R.id.radiobutton3);
         vibrateSwitch = findViewById(R.id.switch_vibrate);
         animateSwitch = findViewById(R.id.switch_animate);
-//        dNumberSwitch = findViewById(R.id.switch_duplicate);
         exclude7Switch = findViewById(R.id.switch_exclude7);
         constraintLayoutInfo = findViewById(R.id.constraintlayout_info);
         infoTitle = findViewById(R.id.tv_infotitle);
@@ -69,7 +65,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         isVibrate = FastSave.getInstance().getBoolean(VIBRATE, true);
         isAnimate = FastSave.getInstance().getBoolean(ANIMATE, true);
-//        isDuplicate = FastSave.getInstance().getBoolean(DUPLICATE, true);
         isExlude7 = FastSave.getInstance().getBoolean(EXCLUDE7, false);
 
         infoVisible = false;
@@ -93,12 +88,6 @@ public class SettingsActivity extends AppCompatActivity {
         } else {
             animateSwitch.setChecked(false);
         }
-
-//        if (isDuplicate) {
-//            dNumberSwitch.setChecked(true);
-//        } else {
-//            dNumberSwitch.setChecked(false);
-//        }
 
         if (isExlude7) {
             exclude7Switch.setChecked(true);
@@ -159,19 +148,6 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
-
-//        dNumberSwitch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (dNumberSwitch.isChecked()) {
-//                    isDuplicate = true;
-//                    FastSave.getInstance().saveBoolean(DUPLICATE, isDuplicate);
-//                } else {
-//                    isDuplicate = false;
-//                    FastSave.getInstance().saveBoolean(DUPLICATE, isDuplicate);
-//                }
-//            }
-//        });
 
         exclude7Switch.setOnClickListener(new View.OnClickListener() {
             @Override

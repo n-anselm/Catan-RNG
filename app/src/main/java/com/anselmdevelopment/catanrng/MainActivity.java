@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static com.anselmdevelopment.catanrng.SettingsActivity.ANIMATE;
-//import static com.anselmdevelopment.catanrng.SettingsActivity.DUPLICATE;
 import static com.anselmdevelopment.catanrng.SettingsActivity.EXCLUDE7;
 import static com.anselmdevelopment.catanrng.SettingsActivity.RADIO1;
 import static com.anselmdevelopment.catanrng.SettingsActivity.RADIO2;
@@ -30,19 +29,8 @@ import static com.anselmdevelopment.catanrng.SettingsActivity.VIBRATE;
 
 public class MainActivity extends AppCompatActivity {
 
-    int number;
-    int animation;
-    int two;
-    int three;
-    int four;
-    int five;
-    int six;
-    int seven;
-    int eight;
-    int nine;
-    int ten;
-    int eleven;
-    int twelve;
+    int number, animation, ex7Ai;
+    int two, three, four, five, six, seven, eight, nine, ten, eleven, twelve;
     public static final ArrayList<String> history = new ArrayList<>();
     public static String hist = null;
     public boolean menuVisible;
@@ -79,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         menuVisible = false;
         historyVisible = false;
         isFirstRun = true;
+        ex7Ai = 1;
 
         final ImageView optionsMenu = findViewById(R.id.options_menu);
         optionsMenu.setOnClickListener(new View.OnClickListener() {
@@ -200,9 +189,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                /** Set onClick listeners on the areas around the menu so that when they are clicked
-                 * the menu disappears
-                 */
+                // Set onClick listeners on the areas around the menu so that when they are clicked
+                // the menu disappears
+
                 topll.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -238,6 +227,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int randomNumber = processRandomNumber();
+                if (FastSave.getInstance().getBoolean(EXCLUDE7, false)) {
+                    if (randomNumber == 7) {
+                        int s;
+                        for (s = 7; s == 7; ) {
+                            if (FastSave.getInstance().getBoolean(RADIO1, true)) {
+                                randomNumber = generateAiNumber();
+                                s = randomNumber;
+                            } else if (FastSave.getInstance().getBoolean(RADIO2, false)) {
+                                randomNumber = generateMethod2();
+                                s = randomNumber;
+                            } else if (FastSave.getInstance().getBoolean(RADIO3, false)) {
+                                randomNumber = generateMethod3();
+                                s = randomNumber;
+                            }
+                        }
+                    }
+                }
                 animateAndSetText(randomNumber);
             }
         });
@@ -265,6 +271,10 @@ public class MainActivity extends AppCompatActivity {
         historyVisible = false;
     }
 
+    /**
+     * If animation is enabled in settings, make it look like the app is scrolling through some
+     * numbers before it displays the random number
+     */
     public void animateAndSetText(final int randomNumber) {
         int delay = 1;
         // If the animate setting in Settings is turned on, then animate the numbers
@@ -305,6 +315,9 @@ public class MainActivity extends AppCompatActivity {
                 }, delay + 450);
                 animation = 2;
 
+                // Store the number in history
+                history.add(Integer.toString(randomNumber));
+
             } else if (animation == 2) {
                 tvRandomNumber.setText("11");
                 new Handler().postDelayed(new Runnable() {
@@ -341,6 +354,9 @@ public class MainActivity extends AppCompatActivity {
                 }, delay + 450);
                 animation = 3;
 
+                // Store the number in history
+                history.add(Integer.toString(randomNumber));
+
             } else if (animation == 3) {
                 tvRandomNumber.setText("7");
                 new Handler().postDelayed(new Runnable() {
@@ -376,13 +392,39 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, delay + 450);
                 animation = 1;
+
+                // Store the number in history
+                history.add(Integer.toString(randomNumber));
             }
         } else {
-            tvRandomNumber.setText(Integer.toString(randomNumber));
+            if (randomNumber != 0) {
+                tvRandomNumber.setText(Integer.toString(randomNumber));
+
+                // Store the number in history
+                history.add(Integer.toString(randomNumber));
+            } else {
+                if (ex7Ai == 1) {
+                    tvRandomNumber.setText("3");
+                    ex7Ai = 2;
+                    history.add("3");
+                } else if (ex7Ai == 2) {
+                    tvRandomNumber.setText("11");
+                    ex7Ai = 3;
+                    history.add("11");
+                } else if (ex7Ai == 3) {
+                    tvRandomNumber.setText("4");
+                    ex7Ai = 1;
+                    history.add("4");
+                }
+            }
         }
     }
 
-    // Generate a random number with AI (Artificial Intelligence)
+    /**
+     * Generate a random number with AI (Artificial Intelligence)
+     *
+     * @return rn
+     */
     public int generateAiNumber() {
         int rn = generateRn2to12();
 
@@ -391,72 +433,14 @@ public class MainActivity extends AppCompatActivity {
             three = 1;
             four = 1;
             five = 1;
-            six = 2;
+            six = 1;
             seven = 1;
-            eight = 2;
-            nine = 2;
+            eight = 1;
+            nine = 1;
             ten = 1;
             eleven = 1;
             twelve = 1;
 
-//            switch (rn) {
-//                case 2:
-//                    two = 1;
-//                    break;
-//                case 3:
-//                    three = 1;
-//                    break;
-//                case 4:
-//                    four = 1;
-//                    break;
-//                case 5:
-//                    five = 1;
-//                    break;
-//                case 6:
-//                    six = 2;
-//                    break;
-//                case 7:
-//                    seven = 1;
-//                    break;
-//                case 8:
-//                    eight = 2;
-//                    break;
-//                case 9:
-//                    nine = 2;
-//                    break;
-//                case 10:
-//                    ten = 1;
-//                    break;
-//                case 11:
-//                    eleven = 1;
-//                    break;
-//                case 12:
-//                    twelve = 1;
-//            }
-
-//            if (rn == 2) {
-//                two += 1;
-//            } else if (rn == 3) {
-//                three += 1;
-//            } else if (rn == 4) {
-//                four += 1;
-//            } else if (rn == 5) {
-//                five += 1;
-//            } else if (rn == 6) {
-//                six += 1;
-//            } else if (rn == 7) {
-//                seven += 1;
-//            } else if (rn == 8) {
-//                eight += 1;
-//            } else if (rn == 9) {
-//                nine += 1;
-//            } else if (rn == 10) {
-//                ten += 1;
-//            } else if (rn == 11) {
-//                eleven += 1;
-//            } else if (rn == 12) {
-//                twelve += 1;
-//            }
             isFirstRun = false;
         } else {
             if (rn == 2 && two < 6) {
@@ -469,7 +453,7 @@ public class MainActivity extends AppCompatActivity {
                 rn = 0;
             } else if (rn == 6 && six < 2) {
                 rn = 0;
-            } else if (rn == 7 && seven < 1) {
+            } else if (rn == 7 && seven < 3) {
                 rn = 0;
             } else if (rn == 8 && eight < 2) {
                 rn = 0;
@@ -482,142 +466,82 @@ public class MainActivity extends AppCompatActivity {
             } else if (rn == 12 && twelve < 6) {
                 rn = 0;
             }
-            if (rn == 2) {
-                two = 0;
-                three += 1;
-                four += 1;
-                five += 1;
-                six += 1;
-                seven += 1;
-                eight += 1;
-                nine += 1;
-                ten += 1;
-                eleven += 1;
-                twelve += 1;
-            } else if (rn == 3) {
-                two += 1;
-                three = 0;
-                four += 1;
-                five += 1;
-                six += 1;
-                seven += 1;
-                eight += 1;
-                nine += 1;
-                ten += 1;
-                eleven += 1;
-                twelve += 1;
-            } else if (rn == 4) {
-                two += 1;
-                three += 1;
-                four += 4;
-                five += 1;
-                six += 1;
-                seven += 1;
-                eight += 1;
-                nine += 1;
-                ten += 1;
-                eleven += 1;
-                twelve += 1;
-            } else if (rn == 5) {
-                two += 1;
-                three += 1;
-                four += 1;
-                five = 0;
-                six += 1;
-                seven += 1;
-                eight += 1;
-                nine += 1;
-                ten += 1;
-                eleven += 1;
-                twelve += 1;
-            } else if (rn == 6) {
-                two = 0;
-                three += 1;
-                four += 1;
-                five += 1;
-                six = 0;
-                seven += 1;
-                eight += 1;
-                nine += 1;
-                ten += 1;
-                eleven += 1;
-                twelve += 1;
-            } else if (rn == 7) {
-                two += 1;
-                three += 1;
-                four += 1;
-                five += 1;
-                six += 1;
-                seven = 0;
-                eight += 1;
-                nine += 1;
-                ten += 1;
-                eleven += 1;
-                twelve += 1;
-            } else if (rn == 8) {
-                two += 1;
-                three += 1;
-                four += 1;
-                five += 1;
-                six += 1;
-                seven += 1;
-                eight = 0;
-                nine += 1;
-                ten += 1;
-                eleven += 1;
-                twelve += 1;
-            } else if (rn == 9) {
-                two += 1;
-                three += 1;
-                four += 1;
-                five += 1;
-                six += 1;
-                seven += 1;
-                eight += 1;
-                nine = 0;
-                ten += 1;
-                eleven += 1;
-                twelve += 1;
-            } else if (rn == 10) {
-                two += 1;
-                three += 1;
-                four += 1;
-                five += 1;
-                six += 1;
-                seven += 1;
-                eight += 1;
-                nine += 1;
-                ten = 0;
-                eleven += 1;
-                twelve += 1;
-            } else if (rn == 11) {
-                two += 1;
-                three += 1;
-                four += 1;
-                five += 1;
-                six += 1;
-                seven += 1;
-                eight += 1;
-                nine += 1;
-                ten += 1;
-                eleven = 0;
-                twelve += 1;
-            } else if (rn == 12) {
-                two += 1;
-                three += 1;
-                four += 1;
-                five += 1;
-                six += 1;
-                seven += 1;
-                eight += 1;
-                nine += 1;
-                ten += 1;
-                eleven += 1;
-                twelve = 0;
-            }
         }
 
+        if (rn != 0) {
+            addToInts();
+            switch (rn) {
+                case 2:
+                    two = 0;
+                    break;
+                case 3:
+                    three = 0;
+                    break;
+                case 4:
+                    four = 0;
+                    break;
+                case 5:
+                    five = 0;
+                case 6:
+                    six = 0;
+                    break;
+                case 7:
+                    seven = 0;
+                    break;
+                case 8:
+                    eight = 0;
+                    break;
+                case 9:
+                    nine = 0;
+                    break;
+                case 10:
+                    ten = 0;
+                    break;
+                case 11:
+                    eleven = 0;
+                    break;
+                case 12:
+                    twelve = 0;
+                    break;
+            }
+        }
         return rn;
+    }
+
+    public void addToInts() {
+        if (!(two > 6)) {
+            two += 1;
+        }
+        if (!(three > 5)) {
+            three += 1;
+        }
+        if (!(four > 4)) {
+            four += 1;
+        }
+        if (!(five > 3)) {
+            five += 1;
+        }
+        if (!(six > 2)) {
+            six += 1;
+        }
+        if (!(seven > 3)) {
+            seven += 1;
+        }
+        if (!(eight > 2)) {
+            eight += 1;
+        }
+        if (!(nine > 3)) {
+            nine += 1;
+        }
+        if (!(ten > 4)) {
+            ten += 1;
+        }
+        if (!(eleven > 5)) {
+            eleven += 1;
+        }
+        if (!(twelve > 6)) {
+            twelve += 1;
+        }
     }
 
     // Generate a random number according to method 2
@@ -670,7 +594,6 @@ public class MainActivity extends AppCompatActivity {
         int max = 12;
         Random random = new Random();
         int randomNumber = random.nextInt(max - min + 1) + min;
-//        history.add(String.valueOf(randomNumber));
         return randomNumber;
     }
 
@@ -686,6 +609,17 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < 1; i = i + 0) {
                 randomNumber = generateAiNumber();
                 i = randomNumber;
+//                if (FastSave.getInstance().getBoolean(EXCLUDE7, false)) {
+//                    if (randomNumber == 7) {
+//                        for (int s = 200; s > 150; s = s + 0) {
+//                            randomNumber = generateAiNumber();
+//                            s = randomNumber;
+//                            if (randomNumber == 200) {
+//                                i = 0;
+//                            }
+//                        }
+//                    }
+//                }
             }
         } else if (FastSave.getInstance().getBoolean(RADIO2, false)) {
             randomNumber = generateMethod2();
@@ -695,24 +629,6 @@ public class MainActivity extends AppCompatActivity {
 
         return randomNumber;
     }
-
-//    public void setRandomNumberText(int i) {
-//        final int x = i;
-//        if (FastSave.getInstance().getBoolean(EXCLUDE7, false) && x == 7) {
-//            processRandomNumber();
-//        } else {
-//            if (FastSave.getInstance().getBoolean(ANIMATE, true)) {
-//                int delay = 1;
-//                new Handler().postDelayed(new Runnable() {
-//                    public void run() {
-//                        tvRandomNumber.setText(Integer.toString(x));
-//                    }
-//                }, delay + 500);
-//            } else {
-//                tvRandomNumber.setText(Integer.toString(x));
-//            }
-//        }
-//    }
 
     public void vibrate() {
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
