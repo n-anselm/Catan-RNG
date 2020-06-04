@@ -209,14 +209,6 @@
 
                         <View style="@style/LinearLayoutDividerStyle" />
 
-<!--                        <Switch-->
-<!--                            android:id="@+id/switch_duplicate"-->
-<!--                            style="@style/SwitchStyle"-->
-<!--                            android:paddingRight="8dp"-->
-<!--                            android:text="@string/filter" />-->
-
-<!--                        <LinearLayout style="@style/LinearLayoutDividerStyle" />-->
-
                         <Switch
                             android:id="@+id/switch_exclude7"
                             style="@style/SwitchStyle"
@@ -278,7 +270,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/linearlayout_info"
-            android:layout_width="280dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             app:cardCornerRadius="20dp"
             app:cardElevation="8dp"
@@ -309,7 +301,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="1.5dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:background="@android:color/white" />
@@ -321,9 +313,48 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="4dp"
                         android:layout_marginRight="16dp"
-                        android:text=""
+                        android:layout_marginBottom="4dp"
+                        android:text="AI: Generates random numbers with AI (Artificial Intelligence)."
                         android:textColor="@android:color/white"
-                        android:textSize="18sp" />
+                        android:textSize="17sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_infotext_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="2x 1-6: This method generates a random number twice (with a range of 1-6), adds the two numbers, and then displays the sum."
+                        android:textColor="@android:color/white"
+                        android:textSize="17sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_infotext_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="2x 1-6: This method generates a random number only once, with a range of 2-12."
+                        android:textColor="@android:color/white"
+                        android:textSize="17sp" />
 
                 </LinearLayout>
 

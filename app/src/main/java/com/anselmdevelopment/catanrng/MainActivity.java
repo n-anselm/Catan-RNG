@@ -606,20 +606,9 @@ public class MainActivity extends AppCompatActivity {
         int randomNumber = 0;
 
         if (FastSave.getInstance().getBoolean(RADIO1, true)) {
-            for (int i = 0; i < 1; i = i + 0) {
+            for (int i = 0; i < 1; ) {
                 randomNumber = generateAiNumber();
                 i = randomNumber;
-//                if (FastSave.getInstance().getBoolean(EXCLUDE7, false)) {
-//                    if (randomNumber == 7) {
-//                        for (int s = 200; s > 150; s = s + 0) {
-//                            randomNumber = generateAiNumber();
-//                            s = randomNumber;
-//                            if (randomNumber == 200) {
-//                                i = 0;
-//                            }
-//                        }
-//                    }
-//                }
             }
         } else if (FastSave.getInstance().getBoolean(RADIO2, false)) {
             randomNumber = generateMethod2();

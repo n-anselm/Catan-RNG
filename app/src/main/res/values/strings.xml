@@ -11,13 +11,13 @@
     <string name="animation">Animation</string>
     <string name="filter">Duplicate number filter</string>
     <string name="exclude7">Exclude 7</string>
-    <string name="version_number_text">Version 1.4.32</string>
+    <string name="version_number_text">Version 1.5.37</string>
     <string name="developed_maintained_by">Developed and maintained by</string>
     <string name="my_name">Anselm Development</string>
     <string name="comments">Any comments, questions, or ideas?</string>
     <string name="send_email">SEND EMAIL</string>
     <string name="version_release_date">Version release date: January 30, 2020</string>
-    <string name="app_version_number">1.4.32</string>
+    <string name="app_version_number">1.5.37</string>
     <string name="text_1">The island of Catan lies before you. The isle consists of 19 terrain tiles surrounded by ocean. Your goal is to settle on Catan, and expand your territory until it becomes the largest and most glorious in Catan.</string>
     <string name="text_2">There are five productive terrain types and one desert on Catan. Each terrain type produces a different type of resource (The desert produces nothing). Each resource you receive is represented by a card.</string>
     <string name="text_3">You begin with 2 settlements and 2 roads. Each settlement is worth 1 victory point. You therefore start the game with 2 victory points! The first player to acquire 10 victory points on his/her turn wins the game.</string>
@@ -29,11 +29,4 @@
     <string name="text_9">For this reason, you can trade with other players. Make them an offer! A successful trade might yield you a big build!</string>
     <string name="text_10">You can only build a new settlement on an unoccupied intersection if you have a road leading to that intersection and the nearest settlement is at least two intersections away.</string>
     <string name="text_11">Carefully consider where you build settlements. The numbers on the round tokens are depicted in varying sizes. They also have dots (pips) below the numbers. The taller the depicted number, and the more pips it has, the more likely that number is to be rolled. The red numbers 6 and 8 are the tallest numbers with the most pips; they are likely to be rolled most frequently.</string>
-    <string name="info_method1">This method generates a number twice (with a range of 1-6), adds the two numbers, and then displays the sum.</string>
-    <string name="info_method2">This method generates a number only once, with a range of 2-12.</string>
-    <string name="info_vibrate">This switch determines if the phone vibrates or not when the generate button is clicked. Note: Vibration intensity can be modified in the system settings.</string>
-    <string name="info_shake">If shake is enabled, you can generate a number by shaking the phone.</string>
-    <string name="info_animate">Enabling animation means you get an animated effect when you generate a number.</string>
-    <string name="info_duplicate_number_filter">The duplicate number filter essentially eliminates the chance of there being two or more same numbers in a row and also improves number generation in general.</string>
-    <string name="info_exclude7">Enabling this will exclude the number 7 from number generation results.</string>
 </resources>
