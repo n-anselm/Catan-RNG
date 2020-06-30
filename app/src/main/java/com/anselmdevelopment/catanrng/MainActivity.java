@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.appizona.yehiahd.fastsave.FastSave;
 
@@ -29,26 +30,32 @@ import static com.anselmdevelopment.catanrng.SettingsActivity.VIBRATE;
 
 public class MainActivity extends AppCompatActivity {
 
-    int number, animation, ex7Ai;
-    int two, three, four, five, six, seven, eight, nine, ten, eleven, twelve;
-    public static final ArrayList<String> history = new ArrayList<>();
-    public static String hist = null;
-    public boolean menuVisible;
-    public boolean historyVisible;
-    public boolean isFirstRun; // This is used for the generateAiNumber method
+    int number, animation, ex7Ai, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve;
+
     private TextView tvRandomNumber;
     private TextView tvGenerateButton;
+
+    public boolean isMenuVisible; // If the menu dialog is visible or not
+    public boolean isHistoryVisible; // If the history dialog is visible or not
+    public boolean isFirstRun; // This is used for the generateAiNumber method
+
+    public static String hist = null;
+
+    public static final ArrayList<String> history = new ArrayList<>();
+
+    public static final String FIRSTRUNAIINTS = "FirstRunAiInts";
+
     ConstraintLayout constraintLayoutMenu;
     ConstraintLayout constraintLayoutHistory;
 
     @Override
     public void onBackPressed() {
-        if (menuVisible) {
+        if (isMenuVisible) {
             constraintLayoutMenu.setVisibility(View.GONE);
-            menuVisible = false;
-        } else if (historyVisible) {
+            isMenuVisible = false;
+        } else if (isHistoryVisible) {
             constraintLayoutHistory.setVisibility(View.GONE);
-            historyVisible = false;
+            isHistoryVisible = false;
         } else {
             super.onBackPressed();
         }
@@ -64,19 +71,19 @@ public class MainActivity extends AppCompatActivity {
         tvGenerateButton = findViewById(R.id.generate_button);
         constraintLayoutHistory = findViewById(R.id.constraintlayout_history);
         animation = 1;
-        menuVisible = false;
-        historyVisible = false;
+        isMenuVisible = false;
+        isHistoryVisible = false;
         isFirstRun = true;
         ex7Ai = 1;
 
-        final ImageView optionsMenu = findViewById(R.id.options_menu);
-        optionsMenu.setOnClickListener(new View.OnClickListener() {
+        final ImageView ivOptionsMenu = findViewById(R.id.options_menu);
+        ivOptionsMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 constraintLayoutMenu = findViewById(R.id.constraintlayout_menu);
                 constraintLayoutMenu.setVisibility(View.VISIBLE);
-                menuVisible = true;
+                isMenuVisible = true;
 
                 TextView tvgameOverView = findViewById(R.id.tv_gameoverview);
                 TextView tvhistory = findViewById(R.id.tv_history);
@@ -120,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
                         tvHistoryNumbers.setText(hist);
                         constraintLayoutHistory.setVisibility(View.VISIBLE);
-                        historyVisible = true;
+                        isHistoryVisible = true;
 
                         ok.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -191,28 +198,24 @@ public class MainActivity extends AppCompatActivity {
 
                 // Set onClick listeners on the areas around the menu so that when they are clicked
                 // the menu disappears
-
                 topll.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         hideMenu();
                     }
                 });
-
                 leftll.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         hideMenu();
                     }
                 });
-
                 rightll.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         hideMenu();
                     }
                 });
-
                 bottomll.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -226,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
         tvGenerateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 int randomNumber = processRandomNumber();
                 if (FastSave.getInstance().getBoolean(EXCLUDE7, false)) {
                     if (randomNumber == 7) {
@@ -251,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void hideMenu() {
         constraintLayoutMenu.setVisibility(View.GONE);
-        menuVisible = false;
+        isMenuVisible = false;
     }
 
     public void hideMenuWithDelay() {
@@ -263,12 +267,12 @@ public class MainActivity extends AppCompatActivity {
                 constraintLayoutMenu.setVisibility(View.GONE);
             }
         }, num * 250);
-        menuVisible = false;
+        isMenuVisible = false;
     }
 
     public void hideHistory() {
         constraintLayoutHistory.setVisibility(View.GONE);
-        historyVisible = false;
+        isHistoryVisible = false;
     }
 
     /**
@@ -426,122 +430,244 @@ public class MainActivity extends AppCompatActivity {
      * @return rn
      */
     public int generateAiNumber() {
-        int rn = generateRn2to12();
 
-        if (isFirstRun) {
-            two = 1;
-            three = 1;
-            four = 1;
-            five = 1;
-            six = 1;
-            seven = 1;
-            eight = 1;
-            nine = 1;
-            ten = 1;
-            eleven = 1;
-            twelve = 1;
+        int rn = 0;
+        int arrayLength = 0;
+        int arrayIndex = 0;
 
-            isFirstRun = false;
-        } else {
-            if (rn == 2 && two < 6) {
-                rn = 0;
-            } else if (rn == 3 && three < 5) {
-                rn = 0;
-            } else if (rn == 4 && four < 4) {
-                rn = 0;
-            } else if (rn == 5 && five < 3) {
-                rn = 0;
-            } else if (rn == 6 && six < 2) {
-                rn = 0;
-            } else if (rn == 7 && seven < 3) {
-                rn = 0;
-            } else if (rn == 8 && eight < 2) {
-                rn = 0;
-            } else if (rn == 9 && nine < 3) {
-                rn = 0;
-            } else if (rn == 10 && ten < 4) {
-                rn = 0;
-            } else if (rn == 11 && eleven < 5) {
-                rn = 0;
-            } else if (rn == 12 && twelve < 6) {
-                rn = 0;
+//        int aiInts = FastSave.getInstance().getInt(FIRSTRUNAIINTS, 1);
+//
+//        if (isFirstRun) {
+//            if (aiInts == 1) {
+                two = 3;
+                three = 1;
+                four = 4; // Allowed
+                five = 1;
+                six = 2; // Allowed
+                seven = 0;
+                eight = 2; // Allowed
+                nine = 3; // Allowed
+                ten = 3;
+                eleven = 5; // Allowed
+                twelve = 2;
+
+//                FastSave.getInstance().saveInt(FIRSTRUNAIINTS, 2);
+//            } else if (aiInts == 2) {
+//                two = 6; // Allowed
+//                three = 5; // Allowed
+//                four = 1;
+//                five = 1;
+//                six = 2; // Allowed
+//                seven = 2; // Allowed
+//                eight = 0;
+//                nine = 1;
+//                ten = 0;
+//                eleven = 5; // Allowed
+//                twelve = 6; // Allowed
+
+//                FastSave.getInstance().saveInt(FIRSTRUNAIINTS, 3);
+//            } else if (aiInts == 3) {
+//                two = 5;
+//                three = 0;
+//                four = 2;
+//                five = 3; // Allowed
+//                six = 0;
+//                seven = 2; // Allowed
+//                eight = 2; // Allowed
+//                nine = 3; // Allowed
+//                ten = 0;
+//                eleven = 5; // Allowed
+//                twelve = 0;
+
+//                FastSave.getInstance().saveInt(FIRSTRUNAIINTS, 1);
+//            }
+//        }
+
+        if (!(two < 6)) {
+            arrayLength += 1;
+        }
+
+        if (!(three < 5)) {
+            arrayLength += 1;
+        }
+
+        if (!(four < 4)) {
+            arrayLength += 1;
+        }
+
+        if (!(five < 3)) {
+            arrayLength += 1;
+        }
+
+        if (!(six < 2)) {
+            arrayLength += 1;
+        }
+
+        if (!(seven < 2)) {
+            arrayLength += 1;
+        }
+
+        if (!(eight < 2)) {
+            arrayLength += 1;
+        }
+
+        if (!(nine < 3)) {
+            arrayLength += 1;
+        }
+
+        if (!(ten < 4)) {
+            arrayLength += 1;
+        }
+
+        if (!(eleven < 5)) {
+            arrayLength += 1;
+        }
+
+        if (!(twelve < 6)) {
+            arrayLength += 1;
+        }
+
+        // Create an array with a length that will accommodate all the numbers that are allowed to be generated
+        int[] rnArray = new int[arrayLength];
+
+        if (!(two < 6)) {
+            if (rnArray[0] == 0) {
+                rnArray[0] = 2;
             }
         }
 
-        if (rn != 0) {
-            addToInts();
-            switch (rn) {
-                case 2:
-                    two = 0;
-                    break;
-                case 3:
-                    three = 0;
-                    break;
-                case 4:
-                    four = 0;
-                    break;
-                case 5:
-                    five = 0;
-                case 6:
-                    six = 0;
-                    break;
-                case 7:
-                    seven = 0;
-                    break;
-                case 8:
-                    eight = 0;
-                    break;
-                case 9:
-                    nine = 0;
-                    break;
-                case 10:
-                    ten = 0;
-                    break;
-                case 11:
-                    eleven = 0;
-                    break;
-                case 12:
-                    twelve = 0;
-                    break;
+        if (!(three < 5)) {
+            for (int i = 0; i == 0; ) {
+                i = rnArray[i];
+                arrayIndex = i;
             }
+            rnArray[arrayIndex] = 3;
         }
-        return rn;
-    }
 
-    public void addToInts() {
-        if (!(two > 6)) {
-            two += 1;
+        if (!(four < 4)) {
+            for (int i = 0; i == 0; ) {
+                i = rnArray[i];
+                arrayIndex = i;
+            }
+            rnArray[arrayIndex] = 4;
         }
-        if (!(three > 5)) {
-            three += 1;
+
+        if (!(five < 3)) {
+            for (int i = 0; i == 0; ) {
+                i = rnArray[i];
+                arrayIndex = i;
+            }
+            rnArray[arrayIndex] = 5;
         }
-        if (!(four > 4)) {
-            four += 1;
+
+        if (!(six < 2)) {
+            for (int i = 0; i == 0; ) {
+                i = rnArray[i];
+                arrayIndex = i;
+            }
+            rnArray[arrayIndex] = 6;
         }
-        if (!(five > 3)) {
-            five += 1;
+
+        if (!(seven < 2)) {
+            for (int i = 0; i == 0; ) {
+                i = rnArray[i];
+                arrayIndex = i;
+            }
+            rnArray[arrayIndex] = 7;
         }
-        if (!(six > 2)) {
-            six += 1;
+
+        if (!(eight < 2)) {
+            for (int i = 0; i == 0; ) {
+                i = rnArray[i];
+                arrayIndex = i;
+            }
+            rnArray[arrayIndex] = 8;
         }
-        if (!(seven > 3)) {
-            seven += 1;
+
+        if (!(nine < 3)) {
+            for (int i = 0; i == 0; ) {
+                i = rnArray[i];
+                arrayIndex = i;
+            }
+            rnArray[arrayIndex] = 9;
         }
-        if (!(eight > 2)) {
-            eight += 1;
+
+        if (!(ten < 4)) {
+            for (int i = 0; i == 0; ) {
+                i = rnArray[i];
+                arrayIndex = i;
+            }
+            rnArray[arrayIndex] = 10;
         }
-        if (!(nine > 3)) {
-            nine += 1;
+
+        if (!(eleven < 5)) {
+            for (int i = 0; i == 0; ) {
+                i = rnArray[i];
+                arrayIndex = i;
+            }
+            rnArray[arrayIndex] = 11;
         }
-        if (!(ten > 4)) {
-            ten += 1;
+
+        if (!(twelve < 6)) {
+            for (int i = 0; i == 0; ) {
+                i = rnArray[i];
+                arrayIndex = i;
+            }
+            rnArray[arrayIndex] = 12;
         }
-        if (!(eleven > 5)) {
-            eleven += 1;
+
+        // Randomly choose a number out of the array of allowed numbers
+        rn = Utils.choose(rnArray);
+
+        two += 1;
+        three += 1;
+        four += 1;
+        five += 1;
+        six += 1;
+        seven += 1;
+        eight += 1;
+        nine += 1;
+        ten += 1;
+        eleven += 1;
+        twelve += 1;
+
+        switch (rn) {
+            case 2:
+                two = 0;
+                break;
+            case 3:
+                three = 0;
+                break;
+            case 4:
+                four = 0;
+                break;
+            case 5:
+                five = 0;
+                break;
+            case 6:
+                six = 0;
+                break;
+            case 7:
+                seven = 0;
+                break;
+            case 8:
+                eight = 0;
+                break;
+            case 9:
+                nine = 0;
+                break;
+            case 10:
+                ten = 0;
+                break;
+            case 11:
+                eleven = 0;
+                break;
+            case 12:
+                twelve = 0;
+                break;
         }
-        if (!(twelve > 6)) {
-            twelve += 1;
-        }
+
+        return rn; // Return the random number
     }
 
     // Generate a random number according to method 2
@@ -606,16 +732,15 @@ public class MainActivity extends AppCompatActivity {
         int randomNumber = 0;
 
         if (FastSave.getInstance().getBoolean(RADIO1, true)) {
-            for (int i = 0; i < 1; ) {
+//            for (int i = 0; i < 1; ) {
                 randomNumber = generateAiNumber();
-                i = randomNumber;
-            }
+//                i = randomNumber;
+//            }
         } else if (FastSave.getInstance().getBoolean(RADIO2, false)) {
             randomNumber = generateMethod2();
         } else if (FastSave.getInstance().getBoolean(RADIO3, false)) {
             randomNumber = generateMethod3();
         }
-
         return randomNumber;
     }
 
